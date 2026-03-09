@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>霊雨霏霏工作室 - 艺术相册</title>
+    <meta name="description" content="霊雨霏霏工作室艺术相册，展示国画、油画、水彩、版画、书法等艺术作品">
+    <meta name="theme-color" content="#667eea">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 顶部固定导航栏 -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-icon">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 28C12 28 15 22 20 22C25 22 28 28 28 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="15" cy="16" r="2" fill="currentColor"/>
+                    <circle cx="25" cy="16" r="2" fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="logo-text">艺术相册</div>
+        </div>
+        <nav class="category-nav">
+            <button class="category-btn active" data-category="all">全部</button>
+            <button class="category-btn" data-category="guohua">国画</button>
+            <button class="category-btn" data-category="youhua">油画</button>
+            <button class="category-btn" data-category="shuicai">水彩</button>
+            <button class="category-btn" data-category="banhua">版画</button>
+            <button class="category-btn" data-category="shufa">书法</button>
+            <button class="category-btn nav-link" data-page="author">作者介绍</button>
+        </nav>
+        <div class="header-search">
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="搜索作品...">
+                <button class="search-clear" id="searchClear" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主页面 - 相册 -->
+    <div class="page-content" id="galleryPage">
+        <!-- 页头横幅 - 作者大照片 -->
+        <section class="page-banner">
+            <div class="banner-overlay"></div>
+            <img src="images/banner/hero.jpg" alt="霊雨霏霏" class="banner-image">
+            <div class="banner-content">
+                <h1 class="banner-title">霊雨霏霏工作室</h1>
+                <p class="banner-subtitle">艺术 · 美学 · 生活</p>
+            </div>
+        </section>
+
+        <main class="main-container">
+            <!-- 左侧时间轴侧边栏 -->
+            <aside class="timeline-sidebar">
+                <h3 class="timeline-title">时间轴</h3>
+                <ul class="timeline-list">
+                    <!-- 时间轴将通过JavaScript动态加载 -->
+                </ul>
+            </aside>
+
+            <!-- 中间图片展示区 -->
+            <section class="gallery-container">
+                <div class="gallery-grid" id="gallery">
+                    <!-- 图片将通过JavaScript动态加载 -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 作品详情页面 -->
+    <div class="page-content detail-page" id="detailPage" style="display: none;">
+        <button class="back-btn" id="backBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            返回相册
+        </button>
+        
+        <main class="detail-container">
+            <!-- 左侧信息面板 -->
+            <aside class="detail-sidebar detail-sidebar-left">
+                <!-- 作品信息卡片 -->
+                <div class="info-card artwork-info-card">
+                    <div class="info-card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <h4>作品信息</h4>
+                    </div>
+                    <div class="info-card-body" id="artworkInfoCard">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+                
+                <!-- 创作时间线 -->
+                <div class="info-card timeline-card">
+                    <div class="info-card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <h4>创作历程</h4>
+                    </div>
+                    <div class="info-card-body" id="artworkTimeline">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- 中间主内容 -->
+            <article class="detail-content">
+                <header class="detail-header">
+                    <h1 class="detail-title" id="detailTitle"></h1>
+                    <div class="detail-meta" id="detailMeta"></div>
+                </header>
+                
+                <!-- 主图 -->
+                <div class="detail-main-image">
+                    <img src="" alt="" id="detailMainImage">
+                    <button class="download-btn" id="downloadBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        下载高清图
+                    </button>
+                </div>
+                
+                <!-- 统计信息 -->
+                <div class="detail-stats">
+                    <button class="like-btn" id="likeBtn">
+                        <svg class="heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <span class="like-count" id="likeCount">0</span>
+                    </button>
+                    <span class="view-count">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span id="viewCount">0</span> 次浏览
+                    </span>
+                </div>
+                
+                <!-- 作品描述 -->
+                <div class="detail-description" id="detailDescription"></div>
+                
+                <!-- 更多图片 -->
+                <div class="detail-gallery" id="detailGallery"></div>
+                
+                <!-- 留言区 -->
+                <div class="comments-section">
+                    <h3>留言板</h3>
+                    <div class="comment-form">
+                        <input type="text" class="comment-name" id="commentName" placeholder="您的昵称">
+                        <textarea class="comment-text" id="commentText" placeholder="写下您的感想..."></textarea>
+                        <button class="comment-submit" id="commentSubmit">发表留言</button>
+                    </div>
+                    <div class="comments-list" id="commentsList"></div>
+                </div>
+            </article>
+            
+            <!-- 右侧边栏 -->
+            <aside class="detail-sidebar detail-sidebar-right">
+                <!-- 分享收藏 -->
+                <div class="info-card share-card">
+                    <div class="info-card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"/>
+                            <circle cx="6" cy="12" r="3"/>
+                            <circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        </svg>
+                        <h4>分享收藏</h4>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="share-buttons">
+                            <button class="share-btn share-wechat" title="分享到微信">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.49.49 0 0 1 .176-.553C23.49 18.406 24.5 16.67 24.5 14.698c0-3.373-3.229-5.84-7.562-5.84zm-2.87 2.938c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+                                </svg>
+                            </button>
+                            <button class="share-btn share-weibo" title="分享到微博">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM9.05 17.219c-.384.616-1.208.884-1.829.602-.612-.279-.793-.991-.406-1.593.379-.595 1.176-.861 1.793-.601.622.263.82.972.442 1.592zm1.27-1.627c-.141.237-.449.353-.689.253-.236-.09-.313-.361-.177-.586.138-.227.436-.346.672-.24.239.09.315.36.194.573zm.176-2.719c-1.893-.493-4.033.45-4.857 2.118-.836 1.704-.026 3.591 1.886 4.21 1.983.64 4.318-.341 5.132-2.179.8-1.793-.201-3.642-2.161-4.149zm7.563-1.224c-.346-.105-.579-.18-.405-.649.388-1.032.428-1.922.003-2.556-.8-1.194-2.986-1.129-5.49-.032 0 0-.786.345-.585-.281.388-1.236.33-2.27-.275-2.868-1.373-1.36-5.024.048-8.157 3.15C.544 11.84-.13 14.89.025 17.492c.296 4.983 4.048 8.014 8.006 8.014 5.195 0 9.64-4.385 10.33-9.236.413-2.898-.334-4.59-2.302-4.621zm1.813-3.705c-.33-.398-.76-.573-1.205-.573-.575 0-1.18.296-1.59.854-.607.828-.463 1.95.323 2.511.324.237.7.332 1.076.332.573 0 1.133-.26 1.506-.776.557-.774.478-1.825-.11-2.348zm2.39-2.028c-.891-1.073-2.063-1.549-3.267-1.549-1.558 0-3.192.8-4.308 2.322-1.651 2.253-1.26 5.319.872 6.844.877.629 1.89.94 2.919.94 1.556 0 3.14-.758 4.191-2.198 1.517-2.07 1.27-4.876-.407-6.359z"/>
+                                </svg>
+                            </button>
+                            <button class="share-btn share-qq" title="分享到QQ">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.003 2c-2.265 0-6.29 1.364-6.29 7.325v1.195S3.55 14.96 3.55 17.474c0 .665.17 1.025.281 1.025.115 0 .903-.484 1.748-2.072 0 0-.18 2.197 1.904 3.967 0 0-1.77.495-1.77 1.182 0 .686 4.078.43 6.29.43 2.213 0 6.29.256 6.29-.43 0-.687-1.77-1.182-1.77-1.182 2.085-1.77 1.905-3.967 1.905-3.967.844 1.588 1.633 2.072 1.746 2.072.111 0 .283-.36.283-1.025 0-2.514-2.166-6.954-2.166-6.954V9.325C18.29 3.364 14.268 2 12.003 2z"/>
+                                </svg>
+                            </button>
+                            <button class="share-btn share-copy" id="copyLinkBtn" title="复制链接">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="collect-btn" id="collectBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <span>收藏作品</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 作者其他作品 -->
+                <div class="info-card related-card">
+                    <div class="info-card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <h4>作者其他作品</h4>
+                    </div>
+                    <div class="info-card-body" id="authorOtherWorks">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+                
+                <!-- 相关推荐 -->
+                <div class="info-card related-card">
+                    <div class="info-card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        <h4>相关推荐</h4>
+                    </div>
+                    <div class="info-card-body" id="relatedWorks">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- 作者介绍页面 -->
+    <div class="page-content author-page" id="authorPage" style="display: none;">
+        <section class="author-hero">
+            <div class="author-hero-content">
+                <div class="author-avatar">
+                    <img src="images/avatar/author.jpg" alt="霊雨霏霏">
+                </div>
+                <div class="author-info">
+                    <h1 class="author-name">霊雨霏霏</h1>
+                    <p class="author-title">独立艺术家 · 画家</p>
+                    <p class="author-motto">"用画笔记录生活，以色彩诠释心灵"</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="author-content">
+            <div class="author-section">
+                <h2 class="section-title">个人简介</h2>
+                <div class="section-content">
+                    <p>霊雨霏霏，当代知名艺术家，毕业于中央美术学院，师从多位国画大师。从事艺术创作二十余年，作品曾在国内外多个美术馆展出，并被多家艺术机构收藏。</p>
+                    <p>她的作品融合了传统与现代的元素，既有东方水墨的意境，又有西方油画的色彩表现力。擅长山水、花鸟、人物等多种题材，尤其以独特的"雨霏山水"风格著称。</p>
+                </div>
+            </div>
+
+            <div class="author-section">
+                <h2 class="section-title">艺术历程</h2>
+                <div class="timeline-vertical">
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2024</div>
+                        <div class="timeline-vertical-content">
+                            <h3>当代艺术大展</h3>
+                            <p>作品《山水清音》入选全国当代艺术大展，获得金奖</p>
+                        </div>
+                    </div>
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2022</div>
+                        <div class="timeline-vertical-content">
+                            <h3>个人画展</h3>
+                            <p>在北京中国美术馆举办"雨霏墨韵"个人画展</p>
+                        </div>
+                    </div>
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2020</div>
+                        <div class="timeline-vertical-content">
+                            <h3>国际交流</h3>
+                            <p>应邀赴法国巴黎进行艺术交流，作品在卢浮宫展出</p>
+                        </div>
+                    </div>
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2018</div>
+                        <div class="timeline-vertical-content">
+                            <h3>艺术成就奖</h3>
+                            <p>获得"中国当代艺术成就奖"</p>
+                        </div>
+                    </div>
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2015</div>
+                        <div class="timeline-vertical-content">
+                            <h3>成立工作室</h3>
+                            <p>在北京创立"霊雨霏霏艺术工作室"</p>
+                        </div>
+                    </div>
+                    <div class="timeline-vertical-item">
+                        <div class="timeline-vertical-year">2004</div>
+                        <div class="timeline-vertical-content">
+                            <h3>毕业于中央美术学院</h3>
+                            <p>以优异成绩毕业于中央美术学院国画系</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-section">
+                <h2 class="section-title">艺术理念</h2>
+                <div class="section-content philosophy">
+                    <blockquote>
+                        "艺术是心灵的窗口，每一幅画都是我与世界的对话。"
+                    </blockquote>
+                    <p>霊雨霏霏认为，艺术创作不仅是技法的展现，更是情感的抒发。她追求"情景交融、形神兼备"的艺术境界，在传统笔墨的基础上融入现代审美，创造出独具一格的艺术语言。</p>
+                    <p>她常说："画如其人，真诚最重要。只有用心去感受，才能创作出打动人心的作品。"</p>
+                </div>
+            </div>
+
+            <div class="author-section">
+                <h2 class="section-title">荣誉奖项</h2>
+                <div class="awards-grid">
+                    <div class="award-item">
+                        <span class="award-year">2024</span>
+                        <span class="award-name">全国当代艺术大展金奖</span>
+                    </div>
+                    <div class="award-item">
+                        <span class="award-year">2022</span>
+                        <span class="award-name">中国艺术贡献奖</span>
+                    </div>
+                    <div class="award-item">
+                        <span class="award-year">2020</span>
+                        <span class="award-name">中法艺术交流大使</span>
+                    </div>
+                    <div class="award-item">
+                        <span class="award-year">2018</span>
+                        <span class="award-name">中国当代艺术成就奖</span>
+                    </div>
+                    <div class="award-item">
+                        <span class="award-year">2016</span>
+                        <span class="award-name">全国青年艺术家优秀奖</span>
+                    </div>
+                    <div class="award-item">
+                        <span class="award-year">2014</span>
+                        <span class="award-name">北京艺术新人奖</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页尾 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">霊雨霏霏工作室</h3>
+                <p class="footer-desc">专注于艺术创作与美学传播，致力于将艺术融入生活，让每一幅作品都成为心灵的栖息之所。</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-subtitle">联系方式</h4>
+                <ul class="footer-contact">
+                    <li>
+                        <span class="contact-icon">📞</span>
+                        <span>联系电话：010-8888-9999</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">📱</span>
+                        <span>手机：138-0000-0000</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">📧</span>
+                        <span>邮箱：contact@linyufei.com</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">🌐</span>
+                        <span>网站：www.linyufei.com</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-subtitle">工作室地址</h4>
+                <p class="footer-address">
+                    北京市朝阳区艺术大道888号<br>
+                    创意产业园A座3层<br>
+                    邮编：100020
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-subtitle">营业时间</h4>
+                <p class="footer-hours">
+                    周一至周五：09:00 - 18:00<br>
+                    周六：10:00 - 17:00<br>
+                    周日及节假日：预约参观
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 霊雨霏霏工作室 版权所有 | 京ICP备00000000号</p>
+            <p class="footer-links">
+                <a href="#" id="aboutLink">关于我们</a>
+                <span>|</span>
+                <a href="#">隐私政策</a>
+                <span>|</span>
+                <a href="#">使用条款</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# GitHub Pages 配置文件
+# 用于配置网站的基本信息
+
+# 网站标题
+title: 霊雨霏霏工作室 - 艺术相册
+
+# 网站描述
+description: 霊雨霏霏工作室艺术相册，展示国画、油画、水彩、版画、书法等艺术作品
+
+# 作者
+author: 霊雨霏霏工作室
+
+# 主题色
+theme-color: "#667eea"
+
+# GitHub仓库信息（留言功能需要配置）
+# 请将下面的信息替换为您自己的GitHub仓库信息
+repository:
+  owner: YOUR_GITHUB_USERNAME
+  name: YOUR_REPO_NAME
+
+# 留言配置
+comments:
+  # 使用GitHub Issues作为留言系统
+  enabled: true
+  # 留言Issue的标签
+  label: comment
