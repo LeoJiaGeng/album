@@ -26,7 +26,7 @@ const CONFIG = {
         // 6. 勾选权限：public_repo（公开仓库）或 repo（私有仓库）
         // 7. 点击 Generate token，立即复制（只显示一次！）
         // 8. 将复制的 token 粘贴到下方（替换 ghp_YOUR_TOKEN_HERE）
-        token: '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',    
+        token: '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',    
     },
     
     // 【可选】留言功能配置
