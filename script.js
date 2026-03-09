@@ -611,9 +611,10 @@ function markdownToHtml(content) {
 // 作品加载
 // ============================================
 async function loadArtwork(filePath, index) {
+    const fullPath = filePath.startsWith('/') ? filePath : `/album/${filePath}`;
     try {
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error(`Failed to load ${filePath}`);
+        const response = await fetch(fullPath);
+        if (!response.ok) throw new Error(`Failed to load ${fullPath}`);
         
         const content = await response.text();
         const parsed = parseFrontMatter(content);
@@ -708,10 +709,13 @@ function switchPage(page) {
         }
     });
     
+    // 修改这里：使用完整路径，避免 base 标签影响
     if (page === 'author') {
-        window.location.hash = 'author';
+        history.pushState(null, null, '/album/#author');
     } else if (page === 'gallery') {
-        window.location.hash = '';
+        history.pushState(null, null, '/album/');
+    } else if (page === 'detail' && currentArtworkSlug) {
+        history.pushState(null, null, `/album/#artwork/${currentArtworkSlug}`);
     }
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
